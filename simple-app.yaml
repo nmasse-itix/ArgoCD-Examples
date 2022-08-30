@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton
+spec:
+  destination:
+    name: ''
+    namespace: simple-app
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: simple-app
+    repoURL: 'https://github.com/nmasse-itix/ArgoCD-Examples.git'
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: false
